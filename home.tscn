@@ -27,7 +27,7 @@ mesh = SubResource("CapsuleMesh_ec3nw")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 50, 0, 0, 0, 1, -0.327795, 61.7312, -0.301375)
-fov = 89.2
+fov = 120.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -35,7 +35,10 @@ fov = 89.2
 shape = SubResource("WorldBoundaryShape3D_sylel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(9.87897, 0, 0, 0, 1.96564, 0, 0, 0, 9.83947, 0, 0, 0)
+transform = Transform3D(715.726, 0, 0, 0, 142.41, 0, 0, 0, 712.864, 0, 0, 0)
 mesh = SubResource("PlaneMesh_7h7n6")
 
 [node name="Node" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 47.7484, 0.296708, 0, -14.8354, 0.954968, 0, 450.394, 0)
