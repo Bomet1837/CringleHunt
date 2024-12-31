@@ -15,6 +15,12 @@ public class Controller : MonoBehaviour
     public float runningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
+    public float hopperStrength = 0.125f;
+    public float slideStrength = 0.125f;
+
+    private float _jv;
+    private float _ws;
+    private float _rs;
     
     [Header("Camera Settings")]
     public Camera playerCamera;
@@ -39,6 +45,12 @@ public class Controller : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         
+        //storing original movement values, jump pad overwrites the entered values.
+        _jv = jumpSpeed;
+        _ws = walkingSpeed;
+        _rs = runningSpeed;
+        
+        
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -59,6 +71,8 @@ public class Controller : MonoBehaviour
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
+ 
+        Mathf.Clamp(moveDirection.y, 0f, 30f);
         if (Input.GetButtonDown("Jump") && canMove && characterController.isGrounded || Input.GetButtonDown("Jump") && jumpCounter > 0)
         {
             moveDirection.y = jumpSpeed;
@@ -96,5 +110,26 @@ public class Controller : MonoBehaviour
 
         var speedValue = characterController.velocity.magnitude.ToString("0" + "m/s");
         speedText.text = speedValue;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        float hopperPower = jumpSpeed + hopperStrength;
+        float slidePower = runningSpeed + slideStrength;
+        switch (hit.gameObject.tag)
+        {
+            case "isHopper":
+                jumpSpeed = hopperPower;
+                break;
+            case "Ground":
+                jumpSpeed = _jv;
+                walkingSpeed = _ws;
+                runningSpeed = _rs;
+                break;
+            case "isSlide":
+                walkingSpeed = slidePower;
+                runningSpeed = slidePower;
+                break;
+        }
     }
 }
