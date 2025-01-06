@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - isSlide
   - isHopper2
+  - FallTrigger
+  - isDrifter
+  - Test
   layers:
   - Default
   - TransparentFX

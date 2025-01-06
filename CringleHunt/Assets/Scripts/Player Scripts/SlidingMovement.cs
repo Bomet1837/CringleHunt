@@ -86,7 +86,7 @@ public class SlidingMovement : MonoBehaviour
     {
         if(isSliding)
         {
-            SlideMove();
+            //SlideMove();
         }
     }
 
@@ -94,8 +94,7 @@ public class SlidingMovement : MonoBehaviour
     {
         isSliding = true;
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
-        playerController.height = 1f;
-        rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         // slideTimer = slideTimeMax; //<==== Slide Timer
 
@@ -106,7 +105,6 @@ public class SlidingMovement : MonoBehaviour
         {
             isSliding = false;
             playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScaleStart, playerObj.localScale.z);
-            playerController.height = 2f;
         }
             
         
