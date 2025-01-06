@@ -45,7 +45,7 @@ public class Controller : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         
-        //storing original movement values, jump pad overwrites the entered values.
+        //storing original movement values, traversal gadgets overwrite the entered values.
         _jv = jumpSpeed;
         _ws = walkingSpeed;
         _rs = runningSpeed;
@@ -120,6 +120,9 @@ public class Controller : MonoBehaviour
         {
             case "isHopper":
                 jumpSpeed = hopperPower;
+                break;
+            case "isHopper2":
+                moveDirection = new Vector3(0f, hopperPower, 0f);
                 break;
             case "Ground":
                 jumpSpeed = _jv;

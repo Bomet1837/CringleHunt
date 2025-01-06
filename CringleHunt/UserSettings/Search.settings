@@ -9,6 +9,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.66F56946" = "p: dir=\"Assets\" "
+	"OpenInspectorPreview.66F56946" = "0"
+	"currentGroup.66F56946" = "store"
 }
 providers = {
 	asset = {
@@ -44,7 +47,7 @@ providers = {
 	store = {
 		active = false
 		priority = 100
-		defaultAction = null
+		defaultAction = "open"
 	}
 	performance = {
 		active = false
@@ -56,15 +59,38 @@ providers = {
 		priority = 210
 		defaultAction = null
 	}
+	menu = {
+		active = true
+		priority = 80
+		defaultAction = null
+	}
+	settings = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
+	calculator = {
+		active = true
+		priority = 10
+		defaultAction = null
+	}
+	static_methods = {
+		active = false
+		priority = 85
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
 recentSearches = [
+	"p: dir=\"Assets\" "
+	""
+	"p: t:texture"
 ]
 searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
-showSavedSearchPanel = false
+showSavedSearchPanel = true
 hideTabs = false
 expandedQueries = [
 ]

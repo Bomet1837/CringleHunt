@@ -7,6 +7,7 @@ TagManager:
   - isHopper
   - Ground
   - isSlide
+  - isHopper2
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Ground
   - isGadget(Hopper)
   - isGadget(Slider)
-  - 
+  - upperCollision
   - 
   - 
   - 
