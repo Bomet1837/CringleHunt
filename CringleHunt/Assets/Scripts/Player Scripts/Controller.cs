@@ -23,20 +23,21 @@ public class Controller : MonoBehaviour
     private float _rs;
 
     private bool isFloating;
+    private bool isPlayable;
 
     [Header("Camera Settings")] public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
 
     CharacterController characterController;
-    Vector3 moveDirection = Vector3.zero;
+    [HideInInspector] public Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
     [HideInInspector] public bool canMove = true;
     public int jumpCounter = 2;
 
-    [SerializeField] public TMP_Text speedText;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject PauseScreen;
 
 
     void Start()
@@ -50,7 +51,10 @@ public class Controller : MonoBehaviour
         _ws = walkingSpeed;
         _rs = runningSpeed;
         
+        isFloating = false;
+        isPlayable = true;
 
+        
 
 
         // Lock cursor
@@ -98,35 +102,47 @@ public class Controller : MonoBehaviour
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
-        if (!characterController.isGrounded)
+        if (!characterController.isGrounded && !isFloating)
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
+        else if (isFloating)
+        {
+            moveDirection.y = 10f;
+        }
+        
+      
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
 
         // Player and Camera rotation
-        if (canMove)
+        if (canMove && isPlayable)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
-
-        var speedValue = characterController.velocity.magnitude.ToString("0" + "m/s");
-        speedText.text = speedValue;
         
-        //Debug txt
-        DebugText();
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPlayable = !isPlayable;
+            if (isPlayable)
+            {
+                Time.timeScale = 1;
+                PauseScreen.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Time.timeScale = 0; 
+                PauseScreen.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
     }
-
-    private void DebugText()
-    {
-        if(isFloating){Debug.Log("Floating 1...");} else {Debug.Log("Not floating.");}
-    }
+    
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -165,9 +181,21 @@ public class Controller : MonoBehaviour
                 break;
             case "isDrifter":
                 isFloating = true;
+                if(isFloating){Debug.Log("Floating 1...");}
                 break;
         }
-        isFloating = gameObject.CompareTag("isDrifter") ? isFloating : !isFloating;
+        
 
+    }
+
+    private void OnTriggerExit(Collider hit)
+    {
+        switch (hit.gameObject.tag)
+        {
+            case "isDrifter":
+                isFloating = false;
+                if(!isFloating){Debug.Log("Not floating.");}
+                break; 
+        }
     }
 }

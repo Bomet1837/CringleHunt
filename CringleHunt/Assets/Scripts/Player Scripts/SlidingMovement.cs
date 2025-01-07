@@ -12,6 +12,8 @@ public class SlidingMovement : MonoBehaviour
     public Transform playerObj;
     public CharacterController playerController;
     public Rigidbody rb;
+    public CrouchCollider crouchCollider;
+    public Controller controller;
 
 
     
@@ -33,7 +35,7 @@ public class SlidingMovement : MonoBehaviour
     private float inputX;
     private float inputY;
     private bool isSliding;
-    private bool CanStand;
+    [HideInInspector] public bool CanStand;
 
     void Start()
     {
@@ -67,7 +69,7 @@ public class SlidingMovement : MonoBehaviour
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit other)
+    /*private void OnControllerColliderHit(ControllerColliderHit other)
     {
         switch (other.gameObject.layer)
         {
@@ -79,7 +81,7 @@ public class SlidingMovement : MonoBehaviour
                 CanStand = true;
                 break;
         }
-    }
+    }*/
 
 
     private void FixedUpdate()
@@ -105,6 +107,8 @@ public class SlidingMovement : MonoBehaviour
         {
             isSliding = false;
             playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScaleStart, playerObj.localScale.z);
+            
+            
         }
             
         

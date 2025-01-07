@@ -352,7 +352,11 @@
 -r:"Library/Bee/artifacts/2400b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"/home/tembo/Unity/Hub/Editor/2022.3.46f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/home/tembo/Unity/Hub/Editor/2022.3.46f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Scripts/Functions/QuitGame.cs"
+"Assets/Scripts/HUD/PauseMenu.cs"
+"Assets/Scripts/HUD/SpeedometerAndGadgetValues.cs"
 "Assets/Scripts/Player Scripts/Controller.cs"
+"Assets/Scripts/Player Scripts/CrouchCollider.cs"
 "Assets/Scripts/Player Scripts/SlidingMovement.cs"
 -langversion:9.0
 /deterministic
