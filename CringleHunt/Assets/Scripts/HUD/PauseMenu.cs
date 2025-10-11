@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
     private GameObject pauseMenu;
     private void Start()
     {
-        _isPlayable = FindObjectOfType<Controller>();
+        _isPlayable = FindAnyObjectByType<Controller>();
     }
 
     private void FixedUpdate()
