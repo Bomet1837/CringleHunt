@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class NPCEntity : MonoBehaviour
 {
     public float startingHealth;
     private float _health;

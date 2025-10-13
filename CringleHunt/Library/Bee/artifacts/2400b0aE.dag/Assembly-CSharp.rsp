@@ -469,8 +469,8 @@
 "Assets/Scripts/Player Scripts/Controller.cs"
 "Assets/Scripts/Player Scripts/CrouchCollider.cs"
 "Assets/Scripts/Player Scripts/SlidingMovement.cs"
-"Assets/Scripts/Weapon Scripting/Gun Scripts/GunTypes/GunBasic.cs"
-"Assets/Scripts/Weapon Scripting/Gun Scripts/GunTypes/GunModule.cs"
+"Assets/Scripts/Weapon Scripting/Gun Scripts/AmmoEntModule.cs"
+"Assets/Scripts/Weapon Scripting/Gun Scripts/GunModule.cs"
 "Assets/Scripts/Weapon Scripting/PickupController.cs"
 "Assets/Scripts/Weapon Scripting/WeaponModule.cs"
 -langversion:9.0

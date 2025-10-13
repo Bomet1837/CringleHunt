@@ -40,6 +40,7 @@ public class WeaponModule : MonoBehaviour
                     break;
 
                 case var _ when evhook == onAttack:
+                /*if (gameObject.GetComponent<PickupController>() != null && gameObject.GetComponent<PickupController>().equipped == false)*/
                     if (isAutomatic)
                     {
                         if (Input.GetKey(KeyCode.Mouse0) && currentCooldown <= 0)
