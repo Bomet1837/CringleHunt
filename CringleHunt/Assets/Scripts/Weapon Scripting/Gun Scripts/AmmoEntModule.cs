@@ -9,7 +9,6 @@ public class AmmunitionModule : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<GunModule>() != null)
         {
-            GunModule gunModule = other.gameObject.GetComponent<GunModule>();
             AddAmmo(gunModule, ammoType, ammoQty);
         }
     }
