@@ -61,13 +61,16 @@
     <Compile Include="Assets\Scripts\Weapon Scripting\PickupController.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\Controller.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripting\WeaponModule.cs" />
+    <Compile Include="Assets\Scripts\NPC Scripting\NPC Behaviours\Movement\BFw_Movement.cs" />
     <Compile Include="Assets\Scripts\NPC Scripting\NPCSpawner.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripting\Gun Scripts\AmmoEntModule.cs" />
     <Compile Include="Assets\Scripts\HUD\SpeedometerAndGadgetValues.cs" />
     <Compile Include="Assets\Scripts\HUD\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\SlidingMovement.cs" />
+    <Compile Include="Assets\Scripts\NPC Scripting\NPCBehaviourFwk.cs" />
     <Compile Include="Assets\Scripts\NPC Scripting\NPCEntity.cs" />
     <Compile Include="Assets\Scripts\Player Scripts\CrouchCollider.cs" />
+    <Compile Include="Assets\Scripts\NPC Scripting\NPC Behaviours\Detection\BFw_Detection.cs" />
     <Compile Include="Assets\Scripts\Functions\QuitGame.cs" />
     <Compile Include="Assets\Scripts\Weapon Scripting\Gun Scripts\GunModule.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

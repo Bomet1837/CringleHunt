@@ -54,6 +54,12 @@ public class NPCEntity : MonoBehaviour
         Debug.Log($"{gameObject.name} has died.");
         Destroy(gameObject);
     }
+    
+    public void EntDespawn()
+    {
+        Debug.Log($"{gameObject.name} has despawned.");
+        Destroy(gameObject);
+    }
 
     public void OnTriggerEnter(Collider other)
     {

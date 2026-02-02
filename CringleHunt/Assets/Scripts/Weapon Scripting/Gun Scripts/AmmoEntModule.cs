@@ -7,7 +7,8 @@ public class AmmunitionModule : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player") && other.gameObject.GetComponent<GunModule>() != null)
+        GunModule gunModule = other.gameObject.GetComponent<GunModule>();
+        if (other.gameObject.CompareTag("Player") && gunModule != null)
         {
             AddAmmo(gunModule, ammoType, ammoQty);
         }
