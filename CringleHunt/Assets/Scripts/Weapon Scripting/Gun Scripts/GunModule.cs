@@ -99,7 +99,7 @@ public class GunModule : MonoBehaviour
                 {
                     if (hitInfo.collider.gameObject.TryGetComponent(out NPCEntity enemy))
                     {
-                        enemy.health -= CalculateDamage(hitInfo.distance);
+                        enemy.Health -= CalculateDamage(hitInfo.distance);
                         if (enemy.rb.constraints == RigidbodyConstraints.None)
                         {
                             Debug.Log("Applying force to ragdoll");

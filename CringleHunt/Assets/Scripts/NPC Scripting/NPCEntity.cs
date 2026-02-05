@@ -8,7 +8,7 @@ public class NPCEntity : MonoBehaviour
     public string entityName;
     public float bodyLife = 5f;
     public float startingHealth;
-    public float health
+    public float Health
     {
         get
         {
@@ -31,13 +31,13 @@ public class NPCEntity : MonoBehaviour
     void Awake()
     {
         entityName = gameObject.name;
+        rb = GetComponent<Rigidbody>();
     }
     
 
     void Start()
     {
-        health = startingHealth;
-        rb = GetComponent<Rigidbody>();
+        Health = startingHealth;
     }
 
     IEnumerator DieRagdoll()

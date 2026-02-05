@@ -12,6 +12,10 @@ GameObject:
   - component: {fileID: 7835272506165617976}
   - component: {fileID: 3379673026355820358}
   - component: {fileID: 2273690359378847929}
+  - component: {fileID: 7832249909231479987}
+  - component: {fileID: 1777321825808617299}
+  - component: {fileID: 6436799996935018353}
+  - component: {fileID: 3402021690755849445}
   - component: {fileID: 5649189301173677936}
   - component: {fileID: 7832365465751195563}
   m_Layer: 0
@@ -29,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5872205650014156827}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.540219, y: -13.381718, z: -8.065543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -105,6 +109,80 @@ MonoBehaviour:
   entityName: Test Dummy
   bodyLife: 5
   startingHealth: 100
+--- !u!114 &7832249909231479987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872205650014156827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fb00115aee71d48aef8b8e360fb838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 10
+  detectionLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  isPlayerDetected: 0
+  player: {fileID: 0}
+  _movementScript: {fileID: 0}
+--- !u!114 &1777321825808617299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872205650014156827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845e00be51dfe0945ae9953a05a78924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personalDistance: 5
+  moveSpeed: 10
+  chaseSpeed: 20
+  fleeSpeed: 20
+  patrolSpeed: 5
+  jumpForce: 5
+--- !u!114 &6436799996935018353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872205650014156827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fb00115aee71d48aef8b8e360fb838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 10
+  detectionLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  isPlayerDetected: 0
+  player: {fileID: 0}
+  _movementScript: {fileID: 0}
+--- !u!114 &3402021690755849445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872205650014156827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845e00be51dfe0945ae9953a05a78924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personalDistance: 3
+  moveSpeed: 2
+  chaseSpeed: 8
+  fleeSpeed: 6
+  patrolSpeed: 3
+  jumpForce: 5
 --- !u!54 &5649189301173677936
 Rigidbody:
   m_ObjectHideFlags: 0

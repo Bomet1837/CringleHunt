@@ -8,26 +8,22 @@ public class BFw_Detection : NPCBehaviourFwk, NPCBehaviourInterface_Detection
     [SerializeField] protected bool isPlayerDetected = false;
     [SerializeField] private GameObject player;
     [SerializeField] private BFw_Movement _movementScript;
-
-    private bool _wasPlayerDetected = false;
     
-    new private void Awake()
+    private new void Awake()
     {
         base.Awake();
         _movementScript = GetComponent<BFw_Movement>();
         player = GameObject.FindWithTag("Player");
     }
 
-    new private void FixedUpdate()
+    private new void FixedUpdate()
     {
         DetectPlayer();
 
-        if (isPlayerDetected /*&& !_wasPlayerDetected*/)
+        if (isPlayerDetected)
         {
             OnNPCAlerted();
         }
-
-       // _wasPlayerDetected = isPlayerDetected;
     }
 
     private void DetectPlayer()
@@ -38,8 +34,7 @@ public class BFw_Detection : NPCBehaviourFwk, NPCBehaviourInterface_Detection
 
     public void OnNPCAlerted()
     {
-        //Debug.Log(isPlayerDetected);
-        _movementScript.MoveTowards(player.transform.position);
+        StartCoroutine(_movementScript.CombatCoroutine(player.transform.position));
     }
 
     public void OnDrawGizmos()
