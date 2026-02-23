@@ -13,6 +13,7 @@ TagManager:
   - Test
   - crouchCollider
   - isAmmoCounter
+  - AmmoPickup
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - isGadget(Hopper)
   - isGadget(Slider)
   - upperCollision
-  - 
-  - 
+  - npcEnemy
+  - npcOther
   - 
   - 
   - 

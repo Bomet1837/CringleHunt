@@ -67,6 +67,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -88,9 +90,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &3674159242953871027
 BoxCollider:
@@ -140,17 +144,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onReload:
-    m_PersistentCalls:
-      m_Calls: []
-  onEquip:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnequip:
-    m_PersistentCalls:
-      m_Calls: []
   atkCooldown: 1
   isAutomatic: 0
+  isMelee: 0
+  heldByPlayer: 1
   isAttacking: 0
 --- !u!114 &4538512306476177375
 MonoBehaviour:
@@ -167,11 +164,14 @@ MonoBehaviour:
   gunName: Shotgun
   gunDescription: 
   ammoType: shotgun
+  gunPhysType: 0
   damage: 4
   range: 35
   spread: 0.2
+  projVelocity: 0
   ammoCapacity: 36
   bulletQtyPerShot: 12
+  maxAmmoCapacity: 0
   _gunTransform: {fileID: 6518356358977792262}
   ammoDisplay: {fileID: 0}
   gunNameDisplay: {fileID: 0}
@@ -198,7 +198,6 @@ MonoBehaviour:
   dropForwardForce: 2
   dropUpwardForce: 2
   equipped: 0
-  slotIndex: 0
   _floatingText: {fileID: 0}
 --- !u!54 &4005878872253397534
 Rigidbody:
@@ -207,10 +206,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5004834538023600159}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -350,6 +349,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -371,9 +372,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4958777694348692240
 MonoBehaviour:
@@ -433,6 +436,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

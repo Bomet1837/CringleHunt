@@ -17,6 +17,34 @@ public class Controller : MonoBehaviour
     public float gravity = 20.0f;
     public float hopperStrength = 0.125f;
     public float slideSpeedScale = 0.125f;
+    public float startingHealth = 700f;
+
+    public static Controller Instance;
+
+    public float Health
+    {
+        get
+        {
+            return _health;
+        }
+        
+        set
+        {
+            _health = Mathf.Clamp(value, 0, startingHealth);
+            Debug.Log($"Health is now {_health}");
+
+            if (_health <= 0)
+            {
+                characterController.transform.position = new Vector3(0, 0, 0);
+                _health = startingHealth;
+                // temp death handling, will be replaced with proper death and respawn system in the future
+            }
+        }
+        
+    }
+    
+    private float _health;
+    
 
     private float _jv;
     private float _ws;
@@ -36,9 +64,21 @@ public class Controller : MonoBehaviour
     [HideInInspector] public bool canMove = true;
     public int jumpCounter = 2;
 
-    [SerializeField] private Rigidbody rb;
+    public Rigidbody rb;
     [SerializeField] private GameObject PauseScreen;
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("Multiple instances of Controller detected. This may cause unexpected behavior.");
+        }
+    }
+    
 
     void Start()
     {
@@ -168,7 +208,7 @@ public class Controller : MonoBehaviour
 
         
     }
-
+// maybe move to dedicated script in the future?
     private void OnTriggerEnter(Collider hit)
     {
         switch (hit.gameObject.tag)
@@ -182,6 +222,20 @@ public class Controller : MonoBehaviour
             case "isDrifter":
                 isFloating = true;
                 if(isFloating){Debug.Log("Floating 1...");}
+                break;
+            case "AmmoPickup":
+                AmmunitionModule thisAmmoModule = hit.gameObject.GetComponent<AmmunitionModule>();
+                GunModule thisGunModule = gameObject.GetComponentInChildren<GunModule>();
+                if (thisAmmoModule != null && thisGunModule != null && thisAmmoModule.ammoType == thisGunModule.ammoType)
+                {
+                    thisAmmoModule.AddAmmo(thisGunModule, thisAmmoModule.ammoType, thisAmmoModule.ammoQty);
+                }
+                else
+                {
+                    Debug.Log("Ammo pickup collided, but either the ammo module or gun module was missing." +
+                              "Ammo Module: " + (thisAmmoModule != null ? thisAmmoModule.ammoType : "None") +
+                              ", Gun Module: " + (thisGunModule != null ? thisGunModule.gunName : "None"));
+                }
                 break;
         }
         

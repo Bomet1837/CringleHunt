@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPCEntity : MonoBehaviour
 {
@@ -27,11 +28,18 @@ public class NPCEntity : MonoBehaviour
     }
     
     private float _health;
+    private NavMeshAgent _agent;
 
     void Awake()
     {
         entityName = gameObject.name;
         rb = GetComponent<Rigidbody>();
+        _agent = GetComponent<NavMeshAgent>();
+        
+        if (!rb)
+        {
+            Debug.LogError("Rigidbody component not found on " + gameObject.name);
+        }
     }
     
 
@@ -42,7 +50,30 @@ public class NPCEntity : MonoBehaviour
 
     IEnumerator DieRagdoll()
     {
-        rb.constraints = RigidbodyConstraints.None;
+        if (!_agent != null)
+        {
+            _agent.isStopped = true;
+            _agent.enabled = false;
+            Destroy(_agent);
+        }
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.constraints = RigidbodyConstraints.None;
+        }
+        
+        var rbChildren = GetComponentsInChildren<Rigidbody>(true);
+        foreach (var childRb in rbChildren)
+        {
+            childRb.isKinematic = false;
+            childRb.useGravity = true;
+        }
+        
+        
+
+
         Debug.Log("rot constraints should be gone");
         yield return new WaitForSeconds(bodyLife);
         Debug.Log("EntDie called from DieRagdoll");

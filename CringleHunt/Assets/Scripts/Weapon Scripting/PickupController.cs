@@ -15,11 +15,6 @@ public class PickupController : MonoBehaviour
     public bool equipped;
     public static bool slotFull = false;
 
-    public int slotIndex = 0;
-    public static bool[] invSlots = new bool[5];
-    public static int currentSlot = 0;
-    public static int maxSlots = 5;
-
     [SerializeField] private GameObject _floatingText;
 
     private void Awake()
@@ -52,9 +47,13 @@ public class PickupController : MonoBehaviour
 
     private void Update()
     {
+        HandlePlayerPickup();
+    }
 
+    private void HandlePlayerPickup()
+    {
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && slotFull == false)
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull)
         {
             Pickup();
         }

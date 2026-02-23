@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+
+public enum GunPhysType { Hitscan, Projectile }
 
 public class GunModule : MonoBehaviour
 {
@@ -8,44 +11,82 @@ public class GunModule : MonoBehaviour
     public string gunName;
     public string gunDescription;
     public string ammoType;
+    public GunPhysType gunPhysType;
     public float damage;
     public float range;
     public float spread;
+    public float projVelocity;
     public int ammoCapacity;
     public int bulletQtyPerShot;
     [HideInInspector] public int maxAmmoCapacity;
+    private bool _heldByPlayer;
 
 
     [Header("References")]
-    [SerializeField]
-    private Transform _gunTransform;
-    public Collider playerCollider;
-    public TextMeshProUGUI ammoDisplay;
-    public TextMeshProUGUI gunNameDisplay;
+    [SerializeField] private Transform _gunTransform;
+    [SerializeField] public TextMeshProUGUI ammoDisplay;
+    [SerializeField] public TextMeshProUGUI gunNameDisplay;
+    private WeaponModule _weaponModule;
 
     private void Awake()
     {
         maxAmmoCapacity = ammoCapacity;
-        if (ammoDisplay == null)
+        
+        _weaponModule = GetComponent<WeaponModule>();
+        if (_weaponModule == null)
         {
-            GameObject ammoDisplayObj = GameObject.Find("GunAmmoCount");
-            if (ammoDisplayObj != null)
+            Debug.LogError("WeaponModule component not found on " + gameObject.name);
+        }
+        else
+        {
+            _heldByPlayer = _weaponModule.heldByPlayer;
+        }
+
+        if (_heldByPlayer)
+        {
+            if (ammoDisplay == null)
             {
-                ammoDisplay = ammoDisplayObj.GetComponent<TextMeshProUGUI>();
+                GameObject ammoDisplayObj = GameObject.Find("GunAmmoCount");
+                if (ammoDisplayObj != null)
+                {
+                    ammoDisplay = ammoDisplayObj.GetComponent<TextMeshProUGUI>();
+                }
+            }
+
+            if (gunNameDisplay == null)
+            {
+                GameObject gunNameDisplayObj = GameObject.Find("GunName");
+                if (gunNameDisplayObj != null)
+                {
+                    gunNameDisplay = gunNameDisplayObj.GetComponent<TextMeshProUGUI>();
+                }
             }
         }
-        if (gunNameDisplay == null)
+        else if (!_heldByPlayer)
         {
-            GameObject gunNameDisplayObj = GameObject.Find("GunName");
-            if (gunNameDisplayObj != null)
-            {
-                gunNameDisplay = gunNameDisplayObj.GetComponent<TextMeshProUGUI>();
-            }
+            ammoDisplay = null;
+            gunNameDisplay = null;
         }
-        _gunTransform = this.gameObject.transform;
+
+        
+            
+        _gunTransform = gameObject.transform;            
     }
 
     private void Update()
+    {
+        if (_heldByPlayer)
+        {
+            AmmoDisplay();
+        }
+
+        if (!_heldByPlayer)
+        {
+            ammoCapacity = maxAmmoCapacity; // NPC guns have infinite ammo 
+        }
+    }
+
+    private void AmmoDisplay()
     {
         if (ammoDisplay != null)
         {
@@ -93,19 +134,23 @@ public class GunModule : MonoBehaviour
         {
             for (int i = 0; i < bulletQtyPerShot; i++)
             {
-                Ray gunRay = new Ray(_gunTransform.position, GetShootDirection());
-                Debug.DrawRay(gunRay.origin, gunRay.direction * range, Color.red, 1f);
-                if (Physics.Raycast(gunRay, out RaycastHit hitInfo, range))
+                if (gunPhysType == GunPhysType.Projectile)
                 {
-                    if (hitInfo.collider.gameObject.TryGetComponent(out NPCEntity enemy))
+                    
+                    // Implement projectile instantiation and behaviour here
+                    Debug.Log("Projectile shooting not implemented yet.");
+                    continue;
+                }
+                
+                if (gunPhysType == GunPhysType.Hitscan)
+                {
+                    Ray gunRay = new Ray(_gunTransform.position, GetShootDirection());
+                    Debug.DrawRay(gunRay.origin, gunRay.direction * range, _heldByPlayer ? Color.red : Color.orange, 1f);
+                    if (Physics.Raycast(gunRay, out RaycastHit hitInfo, range))
                     {
-                        enemy.Health -= CalculateDamage(hitInfo.distance);
-                        if (enemy.rb.constraints == RigidbodyConstraints.None)
-                        {
-                            Debug.Log("Applying force to ragdoll");
-                            enemy.rb.AddForceAtPosition(gunRay.direction * 500f, hitInfo.point);
-                        }
+                        DetermineHitRecipient(gunRay, hitInfo);
                     }
+                    
                 }
             }
             ammoCapacity--;
@@ -116,8 +161,31 @@ public class GunModule : MonoBehaviour
         }
         else
         {
-            Debug.Log("No bullets per shot defined!");
+            Debug.LogWarning("No bullets per shot defined!");
         }
+    }
+    
+    private void DetermineHitRecipient(Ray gunRay, RaycastHit hitInfo)
+    {
+            if (hitInfo.collider.gameObject.TryGetComponent(out NPCEntity enemy) && _heldByPlayer)
+            {
+                enemy.Health -= CalculateDamage(hitInfo.distance);
+                if (enemy.rb.constraints == RigidbodyConstraints.None)
+                {
+                    Debug.Log("Applying force to ragdoll");
+                    enemy.rb.AddForceAtPosition(gunRay.direction * 500f, hitInfo.point);
+                }
+            }
+            else if (hitInfo.collider.gameObject.TryGetComponent(out Controller player) && !_heldByPlayer)
+            {
+                player.Health -= CalculateDamage(hitInfo.distance);
+                if (player.rb.constraints == RigidbodyConstraints.None)
+                {
+                    Debug.Log("Applying force to player ragdoll");
+                    player.rb.AddForceAtPosition(gunRay.direction * 500f, hitInfo.point);
+                }
+                // Implement player damage logic here
+            }
     }
 
     private void OnDrawGizmos()
