@@ -16,6 +16,8 @@ Library\Bee\artifacts\mvdfrm\Unity.Entities.Hybrid.ref.dll_7708604A5D60E5FB.mvfr
 Library\Bee\artifacts\mvdfrm\Unity.Entities.UI.Editor.ref.dll_A9A23157965CE98E.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Entities.UI.ref.dll_9EC0A1AB0EAD6453.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Entities.ref.dll_D004BA08B8128A35.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.InputSystem.ForUI.ref.dll_CFD7856823C3CD5A.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.InputSystem.ref.dll_06424321BA44ABAB.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.InternalAPIEngineBridge.004.ref.dll_9DD979BE3F8C8350.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Mathematics.Editor.ref.dll_3D2C2B72ECCBF4B9.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Mathematics.Extensions.Hybrid.ref.dll_EF25854D5F572750.mvfrm
@@ -214,6 +216,6 @@ Library\Bee\artifacts\mvdfrm\UnityEngine.WindModule.dll_CF1BE28A9A91A974.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEngine.XRModule.dll_11BD9552C01A2AB6.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Android.Gradle.dll_FF6A9A7E6185F9C8.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.Android.Types.dll_22910D8692509AF4.mvfrm
-Library\Bee\artifacts\mvdfrm\Unity.Collections.LowLevel.ILSupport.dll_921D3F57B2557A8B.mvfrm
-Library\Bee\artifacts\mvdfrm\Unity.Cecil.Awesome.dll_5E9F24022C2C4767.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.Collections.LowLevel.ILSupport.dll_9D5B606A742F0CA3.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.Cecil.Awesome.dll_5CB01B6E8E03371D.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.VisualScripting.Antlr3.Runtime.dll_09E3B58BCA4FB048.mvfrm
