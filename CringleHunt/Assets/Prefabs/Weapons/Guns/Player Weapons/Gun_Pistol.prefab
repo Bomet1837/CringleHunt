@@ -395,6 +395,9 @@ MonoBehaviour:
   isAutomatic: 0
   isMelee: 0
   heldByPlayer: 1
+  npcAttackInterval: 0
+  npcShotsPerBurst: 3
+  npcBurstInterval: 2.5
   isAttacking: 0
 --- !u!114 &6040727721554437632
 MonoBehaviour:
@@ -414,14 +417,21 @@ MonoBehaviour:
   gunPhysType: 0
   damage: 24
   range: 70
-  spread: 0.01
+  spread: 3.5
   projVelocity: 0
   ammoCapacity: 64
   bulletQtyPerShot: 1
   maxAmmoCapacity: 0
+  bulletImpactDuration: 10
+  bulletImpactLayers:
+    serializedVersion: 2
+    m_Bits: 1920
   _gunTransform: {fileID: 674278206285163839}
   ammoDisplay: {fileID: 0}
   gunNameDisplay: {fileID: 0}
+  _bulletTracer: {fileID: 9193438026205642535, guid: 7b7367a76cea28e49bc00518ffc372ab, type: 3}
+  _muzzleFlash: {fileID: 0}
+  _bulletImpact: {fileID: 0}
 --- !u!114 &101271767638979993
 MonoBehaviour:
   m_ObjectHideFlags: 0

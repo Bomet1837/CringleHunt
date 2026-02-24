@@ -50,7 +50,7 @@ public class NPCEntity : MonoBehaviour
 
     IEnumerator DieRagdoll()
     {
-        if (!_agent != null)
+        if (_agent != null)
         {
             _agent.isStopped = true;
             _agent.enabled = false;

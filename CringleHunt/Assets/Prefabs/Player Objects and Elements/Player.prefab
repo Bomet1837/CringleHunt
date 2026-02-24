@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 1193815825967956721}
   - component: {fileID: 7925918876295415710}
   - component: {fileID: 2357085684594618283}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CrouchCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,6 +416,8 @@ MonoBehaviour:
   gravity: 20
   hopperStrength: 50
   slideSpeedScale: 0.125
+  startingHealth: 1000
+  isGrounded: 0
   playerCamera: {fileID: 7095097152350097795}
   lookSpeed: 2
   lookXLimit: 90
@@ -442,6 +444,8 @@ MonoBehaviour:
   rb: {fileID: 3266716902351652912}
   crouchCollider: {fileID: 2357085684594618283}
   controller: {fileID: 8609447807818569162}
+  preserveScaleTransforms:
+  - {fileID: 567485447540906123}
   slideTimeMax: 0.75
   slideForce: 200
   slideYScale: 0.5

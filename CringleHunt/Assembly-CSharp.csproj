@@ -904,6 +904,9 @@
     <Reference Include="Unity.Entities">
       <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\Unity.Entities.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.UI.Analytics">
       <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\UnityEditor.UI.Analytics.dll</HintPath>
     </Reference>
@@ -1021,14 +1024,14 @@
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Scenes">
       <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\Unity.Scenes.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Toolchain.Win-x86_64-Linux">
       <HintPath>C:\Users\TeemoWin\Documents\GitHub\CringleHunt\CringleHunt\Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux.dll</HintPath>

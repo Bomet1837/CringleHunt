@@ -148,6 +148,9 @@ MonoBehaviour:
   isAutomatic: 1
   isMelee: 0
   heldByPlayer: 1
+  npcAttackInterval: 0
+  npcShotsPerBurst: 3
+  npcBurstInterval: 2.5
   isAttacking: 0
 --- !u!114 &3180589268735238460
 MonoBehaviour:
@@ -164,17 +167,24 @@ MonoBehaviour:
   gunName: Example Gun
   gunDescription: 
   ammoType: example_gun
-  gunPhysType: 1
+  gunPhysType: 0
   damage: 24
   range: 100
-  spread: 0.05
+  spread: 5
   projVelocity: 0
   ammoCapacity: 500
   bulletQtyPerShot: 5
   maxAmmoCapacity: 0
+  bulletImpactDuration: 10
+  bulletImpactLayers:
+    serializedVersion: 2
+    m_Bits: 1920
   _gunTransform: {fileID: 1562549743794543744}
   ammoDisplay: {fileID: 0}
   gunNameDisplay: {fileID: 0}
+  _bulletTracer: {fileID: 9193438026205642535, guid: 7b7367a76cea28e49bc00518ffc372ab, type: 3}
+  _muzzleFlash: {fileID: 0}
+  _bulletImpact: {fileID: 0}
 --- !u!114 &2012387983902238252
 MonoBehaviour:
   m_ObjectHideFlags: 0

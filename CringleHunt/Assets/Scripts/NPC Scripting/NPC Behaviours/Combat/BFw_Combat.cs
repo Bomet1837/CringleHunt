@@ -76,7 +76,7 @@ public class BFw_Combat : NPCBehaviourFwk
             }
             
             Ray npcGunRay = new Ray(_npcWeapon.transform.position, directionToTarget.normalized);
-            Debug.DrawRay(npcGunRay.origin, npcGunRay.direction * directionToTarget.magnitude, friendlyFire ? Color.green : Color.magenta);
+            //Debug.DrawRay(npcGunRay.origin, npcGunRay.direction * directionToTarget.magnitude, friendlyFire ? Color.green : Color.magenta);
             if (Physics.Raycast(npcGunRay, out RaycastHit hitInfo, directionToTarget.magnitude))
             {
                 if (hitInfo.collider.gameObject.layer == targetLayers && !friendlyFire)

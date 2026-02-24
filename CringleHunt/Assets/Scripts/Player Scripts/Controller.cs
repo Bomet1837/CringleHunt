@@ -20,6 +20,7 @@ public class Controller : MonoBehaviour
     public float startingHealth = 700f;
 
     public static Controller Instance;
+    public bool isGrounded;
 
     public float Health
     {
@@ -31,7 +32,7 @@ public class Controller : MonoBehaviour
         set
         {
             _health = Mathf.Clamp(value, 0, startingHealth);
-            Debug.Log($"Health is now {_health}");
+            Debug.Log($"PLAYER Health is now {_health}");
 
             if (_health <= 0)
             {
@@ -77,6 +78,8 @@ public class Controller : MonoBehaviour
         {
             Debug.LogWarning("Multiple instances of Controller detected. This may cause unexpected behavior.");
         }
+        
+        _health = startingHealth;
     }
     
 
@@ -104,6 +107,48 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
+        MovementHandler();
+        LookHandler();
+        PauseHandler();
+    }
+
+    private void PauseHandler()
+    {
+        //possibly needs to go somewhere else
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPlayable = !isPlayable;
+            if (isPlayable)
+            {
+                Time.timeScale = 1;
+                PauseScreen.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Time.timeScale = 0; 
+                PauseScreen.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
+    }
+
+    private void LookHandler()
+    {
+        // Player and Camera rotation
+        if (canMove && isPlayable)
+        {
+            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        }
+    }
+
+    private void MovementHandler()
+    {
+        isGrounded = characterController.isGrounded;
+        
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -118,6 +163,7 @@ public class Controller : MonoBehaviour
             ? (isRunning ? runningSpeed : (isWalking ? slowerWalkingSpeed : walkingSpeed)) * Input.GetAxis("Horizontal")
             : 0;
         float movementDirectionY = moveDirection.y;
+        
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
 
@@ -140,13 +186,13 @@ public class Controller : MonoBehaviour
         }
 
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-        // as an acceleration (ms^-2)
-        if (!characterController.isGrounded && !isFloating)
+        // when the moveDirection is multiplied by deltaTime)
+        if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
-        else if (isFloating)
+        
+        if (isFloating)
         {
             moveDirection.y = 10f;
         }
@@ -155,37 +201,16 @@ public class Controller : MonoBehaviour
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
-
-        // Player and Camera rotation
-        if (canMove && isPlayable)
-        {
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isPlayable = !isPlayable;
-            if (isPlayable)
-            {
-                Time.timeScale = 1;
-                PauseScreen.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else
-            {
-                Time.timeScale = 0; 
-                PauseScreen.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-            }
-        }
     }
     
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        if (characterController.isGrounded && !Input.GetButtonDown("Jump"))
+        {
+            moveDirection.y = 0f;
+        }
+        
         float slideStrength = slideSpeedScale + walkingSpeed;
         switch (hit.gameObject.tag)
         {
@@ -233,7 +258,7 @@ public class Controller : MonoBehaviour
                 else
                 {
                     Debug.Log("Ammo pickup collided, but either the ammo module or gun module was missing." +
-                              "Ammo Module: " + (thisAmmoModule != null ? thisAmmoModule.ammoType : "None") +
+                              " Ammo Module: " + (thisAmmoModule != null ? thisAmmoModule.ammoType : "None") +
                               ", Gun Module: " + (thisGunModule != null ? thisGunModule.gunName : "None"));
                 }
                 break;
